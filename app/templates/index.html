@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title%} Inicio {% endblock %}
+
+{% block content %}
+
+<div  class="jumbotron">
+  
+  {% if current_user.is_authenticated %}                                
+    <h1>Bem-vindo ao site, {{ current_user.name }}!</h1>
+  {% else %}
+    <h1>Testando Python!</h1>
+  {% endif %}
+
+  
+  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+    
+</div>
+
+<div class="form-group"> 
+    <h1>Nossos <br><b>Programas</b></h1>
+    <div  class="row" >
+        <div  class="col-md-1 col-lg-2 ">
+            <img class="img-responsive" src="/static/img/programa_agentes.png" style="width:60%" alt="Agentes de Inovação">
+            <h4>Agentes de Inovação</h4>        
+        </div>
+        <div class="col-md-1 col-lg-2">                        
+            <img class="img-responsive" src="/static/img/programa_central.png" style="width:60%" alt="Parcerias">
+                <h4>Central de Parceiros</h4>
+        </div>
+        <div class="col-md-1 col-lg-2" >                                                
+            <img class="img-responsive" src="/static/img/programa_coworking.png"  style="width:60%" alt="Ambiente">
+                <h4>Coworking</h4>                        
+        </div>
+        <div  class="col-md-1 col-lg-2" >
+            <div class="" >
+                <img class="img-responsive" src="/static/img/programa_escola_de_inovadores.png" style="width:60%" alt="Escola">
+                    <h4>Escola de Inovadores</h4>
+            </div>
+        </div>            
+        <div  class="col-md-1 col-lg-2">                        
+            <img class="img-responsive" src="/static/img/programa_ideialab.png" style="width:60%" alt="Ideia">
+                <h4>IDEIALab</h4>                        
+        </div>
+        <div class="col-md-1 col-lg-2">                        
+            <img class="img-responsive" src="/static/img/programa_projetos_abertos.png" style="width:60%" alt="Projetos">
+                <h4>Projetos Abertos</h4>                        
+        </div>
+        <div class="col-md-1 col-lg-2">                        
+            <img class="img-responsive" src="/static/img/programa_busca.png" style="width:60%" alt="Busca por professores">
+                <h4>Busca de Professores</h4>                        
+        </div>
+    </div>
+</div>
+<br>
+
+
+<h2 class="center">Eventos</h2>             
+
+<link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
+{% if not palestras %}
+    <h4 class="center"> Nenhum evento disponível</h4>
+{% else %}
+    <div class="carousel-wrapper">
+    <div class="carousel" data-flickity>
+        {% for palestra in palestras %} 
+        <div class="carousel-cell">  
+            <div class="col-4-lg ml-3">            
+                <div class="card" style="width:18rem;">
+                    <img class="card-img-top" src="../static/img/leitor_livro/{{ palestra.banner }}" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ palestra.titulo }}</h5>
+                        <h6 class="card-title">{{ palestra.palestrante }}</h6>
+                        <a href="palestras/viewPalestra/{{ palestra.id }}"><input type="button" class="btn btn-primary" value="Informações"/></a>
+                    </div>
+                </div>           
+            </div> 
+        </div> 
+        {% endfor %}    
+    </div>
+{% endif %}
+<br><br>
+
+<!--
+    esse codigo faz com que os cards do carousel fique se mechendo!! nao gosto!! KKKK
+<script>
+        $(document).ready(function(){
+    
+            $('.col-4-lg').hover(
+                // trigger when mouse hover
+                function(){
+                    $(this).animate({
+                        marginTop: "-=1%",
+                    },200);
+                },
+    
+                // trigger when mouse out
+                function(){
+                    $(this).animate({
+                        marginTop: "0%"
+                    },200);
+                }
+            );
+        });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+-->
+<br>
+
+{% endblock %}

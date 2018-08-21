@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title%} Lista de Leitores {% endblock %}
+
+{% block content %}
+<h3>Lista de Leitores</h3> 
+<div class="form-row">
+    <div class="form-group col-md-6">        
+        <input id="search" name="search" type="search"  class="form-control" placeholder="Digite o código do leitor" />     
+    </div>
+    <div class="form-group">   
+        <button class="btn btn-primary" type="submit">Pesquisar</button>
+    </div>
+</div>
+<div class="form-group">    
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Username</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Situação</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for leitor in leitores %}
+        <tr>
+            <th scope="row">{{ leitor.id }}</th>
+            <td>{{ leitor.nome }}</td>
+            <td>{{ leitor.username }}</td>
+            <td>{{ leitor.email }}</td>
+            <td>{{ leitor.endereco }}</td>
+            <td><a href="list_leitor/alt_leitor/{{ leitor.id }}"> {{ leitor.situacao }}</a></td>
+        </tr>
+        {% endfor %}      
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

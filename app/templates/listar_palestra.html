@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title%} Lista de Palestras {% endblock %}
+
+{% block content %}
+<h3>Lista de Palestras</h3>
+<form action="" > 
+    <div class="form-row">
+        <div class="form-group col-md-6">        
+            <input id="search" name="search" type="search"  class="form-control" placeholder="Digite o código da Palestra" />     
+        </div>
+        <div class="form-group">   
+            <button class="btn btn-primary" type="submit">Pesquisar</button>
+        </div>
+    </div>
+</form>
+<div class="form-group">    
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Palestrante</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data e Hora</th>
+            <th scope="col">Visualizar</th>
+            <th scope="col">Cancelar</th>
+            <th scope="col"> Inscritos</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for palestra in palestras %}
+        <tr>
+            <th scope="row">{{ palestra.id }}</th>
+            <td>{{ palestra.titulo }}</td>            
+            <td>{{ palestra.palestrante }}</td>
+            <td>{{ palestra.duracao }}min</td>
+            <td>{{ palestra.dateTime }}</td>
+            <td><a href="viewPalestra/{{ palestra.id }}">Ver Palestra</a></td>
+            <td><a href="delPalestra/{{ palestra.id }}">Cancelar Palestra</a></td>
+            <td><a href="viewPalestra/lista/{{ palestra.id }}">Gerar Lista</a></td>
+        </tr>
+        {% endfor %}      
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

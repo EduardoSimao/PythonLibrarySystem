@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title%} Cadastrar Emprestimo {% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('livros.post_emprestimo') }}">  
+    <h3>Cadastrar Emprestimo de Livro</h3>
+    <h5>Dados do Leitor</h5>
+    <div class="form-row"> 
+        <div>         
+            <br>
+            <img src="/static/img/leitor_livro/{{ leitor.foto }}" alt="Foto Leitor" width="150px">
+            <br>                     
+        </div>        
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Codigo Leitor</label>        
+            <input id="user_id" name="user_id" type="text"  class="form-control"  value="{{ leitor.id }}" readonly />
+            <label>Nome</label>
+            <input id="nome_leitor" name="nome_leitor" type="text"  class="form-control"  value="{{ leitor.nome }}" readonly />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Endereço</label>
+            <input type="text" class="form-control" value="{{ leitor.endereco }}" readonly />
+            <label>E-mail</label>
+            <input  type="text" class="form-control" value="{{ leitor.email }}" readonly />        
+        </div>            
+    </div> 
+    <h5>Dados do Livro</h5>
+    <div class="form-row">        
+        <div>          
+            <img src="/static/img/leitor_livro/{{ livro.foto }}"" alt="Foto Livro" width="150px">
+            <br>                     
+        </div>
+        <div class="form-group col-md-2">
+            <label>Codigo Livro</label>        
+            <input id="book_id" name="book_id" type="text"  class="form-control"  value="{{ leitor.id }}" readonly />
+        </div>                   
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Nome do Livro</label>
+            <input id="nome_livro" name="nome_livro" type="text"  class="form-control" value="{{ livro.nome_book }}" readonly />
+        </div>
+        <div class="form-group col-md-4">
+            <label>Autor</label>
+            <input  type="text" class="form-control" value="{{ livro.autor }}" readonly />
+        </div>                     
+    </div>
+    <br>    
+    <h5>Dados do Emprestimo</h5>
+    <div class="form-row">          
+        <div class="form-group col-md-2">
+            <label>Data Atual</label>
+            <input id="inicio" name="inicio" type="text"  class="form-control" value="{{ dt_atual }}" readonly />                
+        </div>
+        <div class="form-group col-md-2">
+            <label>Data de Entrega</label>
+            <input id="fim" name="fim" type="text"  class="form-control" value="{{ futuro }}" readonly />                
+        </div>       
+        
+    </div>    
+    <div class="form-row">  
+        <div class="form-group">  
+            <input type="submit" class="btn btn-primary" value="Salvar" />
+            <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a>                       
+            
+        </div>
+    </div>
+</form>
+
+{% endblock %}

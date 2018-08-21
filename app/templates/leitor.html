@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastrar Leitor {% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('leitor.post_leitor') }}" enctype="multipart/form-data">  
+    <h3>Cadastrar Leitor</h3> 
+    <div class="form-row">
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Nome</label>
+            <input id="nome" name="nome" type="text"  class="form-control" placeholder="Nome" required />
+        </div>
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Username</label>
+            <input id="username" name="username" type="text" class="form-control" placeholder="Username" required />
+        </div>
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Senha</label>
+            <input id="password" name="password" type="text" class="form-control" placeholder="Senha" required />
+        </div> 
+        <div class="form-group col-md-6">
+            <label>E-mail</label>
+            <input id="email" name="email" type="text" class="form-control" placeholder="E-mail" required />
+        </div>         
+        <div class="form-group col-md-6">
+            <label>Endereço</label>
+            <input id="endereco" name="endereco" type="text" class="form-control" placeholder="Endereço, nº - Cidade"required  />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Foto do Leitor</label>             
+            <p>
+                <input id="imagem" type="file" class="form-control" name="imagem" required />
+            </p>           
+        </div>
+               
+    </div> 
+
+    <div class="form-group">    
+        <input type="submit" class="btn btn-primary" value="Salvar" />
+        <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a>
+    </div>
+</form>
+
+{% endblock %}

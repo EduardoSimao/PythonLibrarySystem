@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title%} Pesquisar {% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('livros.pesquisarLivro') }}">  
+    <h3>Pesquisar Livro e Leitor</h3> 
+    <br>
+    <div class="form-row" >        
+        <div class="form-group col-md-2">
+            <label>Código do Livro </label>
+            <input id="cod_livro" name="cod_livro" type="text"  class="form-control" placeholder="Código do Livro" required />
+        </div>                 
+    </div>
+    <div class="form-row">        
+        <div class="form-group col-md-2">
+                <label>Código do Leitor </label>
+            <input id="cod_leitor" name="cod_leitor" type="text"  class="form-control" placeholder="Código do Leitor" required />
+            
+        </div>  
+    </div>
+    <div class="form-row">  
+        <div class="form-group">  
+            <input type="submit" class="btn btn-primary" value="Próximo" />
+            <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a>
+        </div>
+    </div>
+        
+</form>
+
+{% endblock%}

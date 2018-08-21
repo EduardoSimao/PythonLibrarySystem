@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title%} {{palestra.titulo }} {% endblock %}
+
+{% block content %}
+<form method="POST" action="cadPublico/{{ palestra.id }}/{{ current_user.id }}">  
+    <div class="jumbotron">  
+        <br>                         
+            <h1>Palestra: {{ palestra.titulo }}!</h1>
+        <br>
+    </div>
+
+    <div class="content">
+        <div class="form-control">        
+            <div class="form-row">                      
+                <div class="form-group">                     
+                    <img src="/static/img/leitor_livro/{{ palestra.banner }}" alt="Foto Livro" width="450px">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Palestrante</label>
+                    <input id="palestrante" name="palestrante" type="text"  class="form-control" value="{{ palestra.palestrante }}" disabled />
+                    <label>Descrição</label>
+                    <textarea rows="4" cols="50" style="resize:none" id="descricao" name="descricao" class="form-control" disabled >{{ palestra.descricao}} </textarea>   
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Duração(min)</label>
+                    <input id="duracao" name="duracao" type="number" class="form-control"  value="{{ palestra.duracao }}" disabled />
+                    <label>Dia e Hora</label>
+                    <input id="dateTime" name="dateTime" type="datetime-local" class="form-control" value="{{ palestra.dateTime }}" disabled />
+                    <br><br><br><br>
+                    <div class="form-group">
+                        {% if current_user.is_authenticated and current_user.admin == True %}  
+                        <a href="lista/{{ palestra.id }}"><input type="button" class="btn btn-primary" value="Lista de Inscritos"/></a>
+                        <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a> 
+                        {% elif current_user.is_authenticated and current_user.admin == False  %}
+                        <input type="submit" class="btn btn-primary" value="Inscrever-me" />
+                        <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a> 
+                        {% elif current_user.is_anonymous  %}
+                        <h6>Entre/Cadastre-se para se inscrever na palestra</h6>
+                        <a href="{{ url_for('users.login') }}"><input type="button" class="btn btn-primary" value="Entrar"/></a>                          
+
+                        {% endif %}
+                    </div> 
+                </div>                                                    
+            </div> 
+        </div>         
+    </div>
+    <br> 
+</form>
+
+{% endblock %}
