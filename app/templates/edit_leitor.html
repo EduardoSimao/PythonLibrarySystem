@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Alterar Leitor {% endblock %}
+
+{% block content %}
+<form method="POST" >  
+    <h3>Alterar Leitor</h3> 
+    <div class="form-row">
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Nome</label>
+            <input id="nome" name="nome" type="text"  class="form-control" value="{{ leitor.nome }}" required />
+        </div>
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Username</label>
+            <input id="username" name="username" type="text" class="form-control" value="{{ leitor.username }}"  required />
+        </div>
+        <div class="form-group col-md-4 col-md-offset-3">
+            <label>Senha</label>
+            <input id="password" name="password" type="password" class="form-control" placeholder="Digite nova senha, caso queira!" required />
+        </div> 
+        <div class="form-group col-md-6">
+            <label>E-mail</label>
+            <input id="email" name="email" type="text" class="form-control" value="{{ leitor.email }}"  required />
+        </div>         
+        <div class="form-group col-md-6">
+            <label>Endereço</label>
+            <input id="endereco" name="endereco" type="text" class="form-control" value="{{ leitor.endereco }}"  required  />
+        </div>
+               
+    </div> 
+
+    <div class="form-group">    
+        <input type="submit" class="btn btn-primary" value="Salvar" />
+        <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a>
+    </div>
+</form>
+
+{% endblock %}

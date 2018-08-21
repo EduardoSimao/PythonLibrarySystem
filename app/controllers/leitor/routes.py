@@ -52,9 +52,9 @@ def listarLeitor():
     return render_template('listar_leitor.html', leitores = leitores)
 
 #************************ Alterar Leitor ****************************
-@leitor_blueprint.route('/list_leitor/alt_leitor/<id_leitor>')
+@leitor_blueprint.route('/list_leitor/alt_situacao/<id_leitor>')
 @login_required
-def alt_leitor(id_leitor):
+def alt_situacao(id_leitor):
     
         
     leitor = Leitor.query.filter_by(id = id_leitor).first()
@@ -69,3 +69,22 @@ def alt_leitor(id_leitor):
     return redirect(url_for('leitor.listarLeitor'))
 
 
+@leitor_blueprint.route('/list_leitor/alt_leitor/<id_leitor>', methods=['GET', 'POST'])
+@login_required
+def alt_leitor(id_leitor):
+    leitor = Leitor.query.filter_by(id = id_leitor).first()
+
+    if request.method == 'POST':
+        password = request.form.get('password')
+
+        leitor.nome = request.form.get('nome')
+        leitor.username = request.form.get('username')
+        leitor.password =  generate_password_hash(password)
+        leitor.email = request.form.get('email')
+        leitor.endereco = request.form.get('endereco')
+        
+        db.session.commit()
+        return redirect(url_for('leitor.listarLeitor'))
+    
+
+    return render_template('edit_leitor.html', leitor = leitor)

@@ -21,6 +21,7 @@
             <th scope="col">E-mail</th>
             <th scope="col">Endereço</th>
             <th scope="col">Situação</th>
+            <th scope="col">Alterar Dados</th>
         </tr>
         </thead>
         <tbody>
@@ -31,7 +32,8 @@
             <td>{{ leitor.username }}</td>
             <td>{{ leitor.email }}</td>
             <td>{{ leitor.endereco }}</td>
-            <td><a href="list_leitor/alt_leitor/{{ leitor.id }}"> {{ leitor.situacao }}</a></td>
+            <td><a href="list_leitor/alt_situacao/{{ leitor.id }}"> {{ leitor.situacao }}</a></td>
+            <td><a href="list_leitor/alt_leitor/{{ leitor.id }}">Alterar</a></td>
         </tr>
         {% endfor %}      
         </tbody>
