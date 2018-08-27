@@ -143,17 +143,22 @@ def delPublico(usuario_id, palestra_id):
 @login_required
 def pdf_template(id_palestra):
     if not current_user.admin == True:
-        return render_template('404.html'), 404
+        return render_template('404.html'), 404    
         
     publico = Publico.query.filter_by(id_palestra = id_palestra).all()
-    palestra = Palestra.query.filter_by(id = id_palestra).first()
+    
+    if not publico:
+       flash('Nenhum usuário cadastrado na Palestra')
+       return render_template('listar_publico.html', usuario = publico)
+    else:
+        palestra = Palestra.query.filter_by(id = id_palestra).first()
 
-    rendered = render_template('listaInscritos.html', publico = publico, palestra = palestra)
-    pdf = pdfkit.from_string(rendered, False)
+        rendered = render_template('listaInscritos.html', publico = publico, palestra = palestra)
+        pdf = pdfkit.from_string(rendered, False)
 
-    response = make_response(pdf)
-    response.headers['Content-ype'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename = {}.pdf'.format(palestra.titulo)
+        response = make_response(pdf)
+        response.headers['Content-ype'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename = {}.pdf'.format(palestra.titulo)
 
-    return response
+        return response
 
