@@ -4,6 +4,7 @@ from app.models.tables import Leitor
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from flask_login import current_user
+from app.controllers.utils.routes import cropImge
 
 leitor_blueprint = Blueprint(
     'leitor',
@@ -30,7 +31,9 @@ def leitor():
 @leitor_blueprint.route('/post_leitor', methods=["POST"])
 @login_required
 def post_leitor():
-    filename = photos.save(request.files['imagem'])        
+    filename = photos.save(request.files['imagem'])
+    cropImge(filename)   
+         
     password = request.form['password']
     leitor = Leitor(request.form['nome'], request.form['username'], generate_password_hash(password), request.form['email'], request.form['endereco'], situacao = True, foto = filename )
     

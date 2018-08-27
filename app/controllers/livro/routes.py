@@ -4,6 +4,7 @@ from app.models.tables import Leitor, Book, Alugar
 from datetime import date
 from functools import wraps
 from flask_login import current_user
+from app.controllers.utils.routes import cropImge
 
 livros_blueprint = Blueprint(
     'livros',
@@ -34,6 +35,8 @@ def livros():
 def post_livro():
           
     filename = photos.save(request.files['imagem'])  
+    
+    cropImge(filename)
 
     livro = Book(request.form['nome_book'], request.form['genero'], request.form['autor'], request.form['ano'], foto = filename)
     db.session.add(livro)

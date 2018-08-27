@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from app.models.tables import User, Palestra, Publico
 import pdfkit
 import os
+from app.controllers.utils.routes import cropImge
 
 palestras_blueprint = Blueprint(
     'palestras',
@@ -21,6 +22,7 @@ def palestra():
         
     if request.method =='POST':
         filename = photos.save(request.files['imagem'])
+        cropImge(filename)
         palestra = Palestra(request.form['titulo'], request.form['palestrante'], request.form['descricao'], filename, request.form['duracao'], request.form['dateTime'])
         
         db.session.add(palestra)
