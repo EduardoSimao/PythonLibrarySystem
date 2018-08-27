@@ -55,7 +55,7 @@ def listarLeitor():
     return render_template('listar_leitor.html', leitores = leitores)
 
 #************************ Alterar Leitor ****************************
-@leitor_blueprint.route('/list_leitor/alt_situacao/<id_leitor>')
+'''@leitor_blueprint.route('/list_leitor/alt_situacao/<id_leitor>')
 @login_required
 def alt_situacao(id_leitor):
     
@@ -69,7 +69,7 @@ def alt_situacao(id_leitor):
         leitor.situacao = True
         db.session.commit()
         
-    return redirect(url_for('leitor.listarLeitor'))
+    return redirect(url_for('leitor.listarLeitor'))'''
 
 
 @leitor_blueprint.route('/list_leitor/alt_leitor/<id_leitor>', methods=['GET', 'POST'])

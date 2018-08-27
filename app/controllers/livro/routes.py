@@ -101,7 +101,7 @@ def pesquisarLivro():
         futuro = futuro.strftime('%d/%m/%Y')
 
         
-    return render_template('emprestar2.html',livro = livro, leitor = leitor, dt_atual = dt_atual, futuro = futuro)
+    return render_template('emprestar2.html',livro = livro, leitor = leitor, dt_atual = dt_atual, futuro = futuro, cad = True)
 
 @livros_blueprint.route('/emprestar/post_emprestimo', methods =['POST'])
 @login_required
@@ -118,11 +118,22 @@ def post_emprestimo():
 
 #******************* Listas de Emprestimos *****************
 @livros_blueprint.route('/emprestar/list_emprestimo', methods=['GET'])
-
 def listarEmprestimo(): 
     emprestimo = Alugar.query.all()
 
     return render_template('listar_Emprestimo.html', emprestimo = emprestimo)
+
+#**************************** Detalhar Emprestismo *********************
+@livros_blueprint.route('/emprestar/list_emprestimo/<id_emprestimo>', methods=['GET'])
+def viewEmprestimo(id_emprestimo):
+    emprestimo = Alugar.query.filter_by(id = id_emprestimo).first()
+
+    dt_atual = emprestimo.inicio
+    futuro = emprestimo.fim
+
+    livro = Book.query.filter_by(id = emprestimo.book_id).first()
+    leitor = Leitor.query.filter_by(id = emprestimo.user_id).first()
+    return render_template('emprestar2.html',livro = livro, leitor = leitor, dt_atual = dt_atual, futuro = futuro, cad = False)
 
 #************************ Alterações atraves das pesqisas****************************
 @livros_blueprint.route('/emprestar/list_emprestimo/del_emprestimo/<id_emprestimo>')

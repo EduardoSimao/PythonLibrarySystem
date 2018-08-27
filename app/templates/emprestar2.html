@@ -3,9 +3,13 @@
 {% block title%} Cadastrar Emprestimo {% endblock %}
 
 {% block content %}
-<form method="POST" action="{{ url_for('livros.post_emprestimo') }}">  
+<form method="POST" action="{{ url_for('livros.post_emprestimo') }}"> 
+    {% if cad == True %} 
     <h3>Cadastrar Emprestimo de Livro</h3>
-    <h5>Dados do Leitor</h5>
+    {% else %}
+    <h3>Visualizar Emprestimo de Livro</h3>
+    {% endif %}
+    <h5><center><b>Dados do Leitor</b></center></h5>
     <div class="form-row"> 
         <div>         
             <br>
@@ -25,10 +29,12 @@
             <input  type="text" class="form-control" value="{{ leitor.email }}" readonly />        
         </div>            
     </div> 
-    <h5>Dados do Livro</h5>
+    
+    <h5><center><b>Dados do Livro</b></center></h5>
     <div class="form-row">        
-        <div>          
-            <img src="/static/img/leitor_livro/{{ livro.foto }}"" alt="Foto Livro" width="150px">
+        <div>  
+            <br>        
+            <img src="/static/img/leitor_livro/{{ livro.foto }}" alt="Foto Livro" width="150px">
             <br>                     
         </div>
         <div class="form-group col-md-2">
@@ -45,7 +51,7 @@
         </div>                     
     </div>
     <br>    
-    <h5>Dados do Emprestimo</h5>
+    <h5><center><b>Dados do Emprestimo</b></center></h5>
     <div class="form-row">          
         <div class="form-group col-md-2">
             <label>Data Atual</label>
@@ -58,8 +64,10 @@
         
     </div>    
     <div class="form-row">  
-        <div class="form-group">  
+        <div class="form-group"> 
+            {% if cad == True%} 
             <input type="submit" class="btn btn-primary" value="Salvar" />
+            {% endif %}
             <a href="{{ url_for('index.index') }}"><input type="button" class="btn btn-primary" value="Cancelar"/></a>                       
             
         </div>

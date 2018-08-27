@@ -32,7 +32,11 @@
             <td>{{ leitor.username }}</td>
             <td>{{ leitor.email }}</td>
             <td>{{ leitor.endereco }}</td>
-            <td><a href="list_leitor/alt_situacao/{{ leitor.id }}"> {{ leitor.situacao }}</a></td>
+            {% if leitor.situacao  == True %}
+            <td>Sem Pendências</td>
+            {% else %}
+            <td>Com Pendências</td>
+            {% endif %}
             <td><a href="list_leitor/alt_leitor/{{ leitor.id }}">Alterar</a></td>
         </tr>
         {% endfor %}      

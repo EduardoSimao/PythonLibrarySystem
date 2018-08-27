@@ -22,6 +22,7 @@
             <th scope="col">Data Retirada</th>
             <th scope="col">Data Entrega</th>
             <th scope="col">Situação</th>
+            <th scope="col">Ver Emprestimo</th>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +33,8 @@
             <td>{{ info.nome_livro }}</td>
             <td>{{ info.inicio }}</td>
             <td>{{ info.fim }}</td>
-            <td><a href="list_emprestimo/del_emprestimo/{{ info.id }}">Não devolvido</a></td>            
+            <td><a href="list_emprestimo/del_emprestimo/{{ info.id }}">Não devolvido</a></td> 
+            <td><a href="list_emprestimo/{{ info.id }}">Ver Emprestimo</a></td>           
         </tr>
         {% endfor %}      
         </tbody>
