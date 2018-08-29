@@ -70,6 +70,8 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="">Atualizar Dados</a>
                 <a class="dropdown-item" href="palestras/list_usuario/{{ current_user.id }}">Pesquisar minhas palestra</a>                              
+                <a class="dropdown-item" href="{{ url_for('livros.listarLivro') }}">Pesquisar Livro</a>
+                
               </div>
             </li>
           {% endif %}

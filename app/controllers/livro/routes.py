@@ -38,7 +38,7 @@ def post_livro():
     
     cropImge(filename)
 
-    livro = Book(request.form['nome_book'], request.form['genero'], request.form['autor'], request.form['ano'], foto = filename)
+    livro = Book(request.form['nome_book'], request.form['descricao'], request.form['genero'], request.form['autor'], request.form['ano'], foto = filename)
     db.session.add(livro)
     db.session.commit()
     flash('Cadastrado com sucesso!')
@@ -47,7 +47,6 @@ def post_livro():
         
 #******************* Listas de livros *****************
 @livros_blueprint.route('/list_livros', methods=['GET'])
-@login_required
 def listarLivro():
     books = Book.query.all()   
 
@@ -70,6 +69,13 @@ def alt_livro(id_livro):
         return redirect(url_for('livros.listarLivro'))   
 
     return render_template("edit_book.html", livro = livro)
+
+#******************* Ver Detalhes do Livro ******************************
+@livros_blueprint.route('/list_livros/ver_livro/<livro_id>')
+def ver_livro(livro_id):
+    livro = Book.query.filter_by(id = livro_id).first()
+
+    return render_template('info_livro.html', livro = livro)
 
 #************************** adiconar livro emprestado ******************
 @livros_blueprint.route('/emprestar')

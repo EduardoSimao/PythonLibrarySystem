@@ -21,7 +21,10 @@
             <th scope="col">Gênero</th>
             <th scope="col">Ano de Lançamento</th>
             <th scope="col">Autor</th>
+            {% if current_user.is_authenticated and current_user.admin == True %}
             <th scope="col">Alterar</th>
+            {% endif %}
+            <th scope="col">Detalhes</th>
         </tr>
         </thead>
         <tbody>
@@ -31,9 +34,11 @@
             <td>{{ book.nome_book }}</td>
             <td>{{ book.genero }}</td>
             <td>{{ book.ano }}</td>
-            <td>{{ book.autor }}</td>            
+            <td>{{ book.autor }}</td>
+            {% if current_user.is_authenticated and current_user.admin == True %}            
             <td><a href="/livros/list_livros/alt_livro/{{ book.id }}"> Alterar</a></td>
-        </tr>
+            {% endif %}
+            <td><a href="/livros/list_livros/ver_livro/{{ book.id }}">Ver</a></td>
         {% endfor %}      
         </tbody>
     </table>

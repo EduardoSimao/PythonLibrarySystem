@@ -68,13 +68,15 @@ class Book(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome_book = db.Column(db.String)
+    descricao = db.Column(db.String(800))
     genero = db.Column(db.String)
     autor = db.Column(db.String)
     ano = db.Column(db.Integer)
     foto = db.Column(db.String(100))
 
-    def __init__(self, nome_book, genero, autor, ano, foto):
+    def __init__(self, nome_book, descricao, genero, autor, ano, foto):
         self.nome_book = nome_book
+        self.descricao = descricao
         self.genero = genero
         self.autor =autor
         self.ano = ano

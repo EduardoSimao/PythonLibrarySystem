@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title%} {{ livro.nome_book }} {% endblock %}
+
+{% block content %}
+<form>      
+    <div class="content">               
+        <div class="form-control">
+                <h3><center>{{ livro.nome_book }}</center></h3>
+            <div class="form-row">                         
+                <div class="form-group col-md-7"> 
+                    <div class="form-row">    
+                         <div class="form-group col-md-12">                               
+                            <label>Descrição</label>
+                            <textarea rows="14" cols="50" style="resize:none" id="descricao" name="descricao" class="form-control" readonly >{{ livro.descricao }} </textarea>
+                        </div>                              
+                    </div>                    
+                </div>
+                <div> 
+                    <br><br>                  
+                    <img src="/static/img/leitor_livro/{{ livro.foto }}" alt="Foto Livro" width="450px">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gênero</label>
+                    <input id="genero" name="genero" type="text" class="form-control" placeholder="{{ livro.genero }}" readonly />
+                    
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Ano de Lançamento</label>
+                    <input id="ano" name="ano" type="text" class="form-control" placeholder="{{ livro.ano }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Autor</label>
+                    <input id="autor" name="autor" type="text" class="form-control" placeholder="{{ livro.autor }}" readonly />          
+                </div>
+            </div>
+            <div class="form-group">
+                <center><a href="{{ url_for('livros.listarLivro') }}"><input type="button" class="btn btn-primary" value="Voltar"/></a></center> 
+            </div>                                
+        </div>                    
+    </div>
+    <br> 
+</form>
+
+{% endblock %}
